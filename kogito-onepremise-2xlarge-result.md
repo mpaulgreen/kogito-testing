@@ -54,7 +54,8 @@ use kogito_quarkus
 show collections
 db.demo.simpleHT.createIndex({"id":1})
 db.demo.simpleHT.count()
-db.demo.remove({})
+db.demo.simpleHT.remove({})
+db.demo.simpleHT.getIndexes()
 ```
 
 - application.properties for mongo db
