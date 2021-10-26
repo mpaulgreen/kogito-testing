@@ -67,7 +67,7 @@ curl http://localhost:9090/benchmark/simple/120/60
   "requestsPerSecond" : 1205.0
 }
 ```
--3 replicas of app and mongo CPU request - 2 memory - 2 Gi each 
+-3 replicas of app and mongo CPU request - 4 memory - 4 Gi each 
 ```
 curl http://localhost:9090/benchmark/simple/120/60
 {
@@ -89,7 +89,7 @@ curl http://localhost:9090/benchmark/simple/120/60
   "requestsPerSecond" : 2393.0
 }
 ```
--3 replicas of app and mongo CPU request - 2 memory - 4 Gi each
+-3 replicas of app and mongo CPU request - 4 memory - 8 Gi each
 ```
 [ec2-user@ip-172-20-48-244 ~]$ curl http://localhost:9090/benchmark/simple/120/60
 {
@@ -111,7 +111,7 @@ curl http://localhost:9090/benchmark/simple/120/60
   "requestsPerSecond" : 2280.0
 }
 ```
-- 3 replicas of app and mongo CPU request - 3 memory - 4 Gi each
+- 3 replicas of app and mongo CPU request - 6 memory - 8 Gi each
 ```
 {
   "noOfExecutions" : 290400,
