@@ -113,6 +113,7 @@ curl http://localhost:9090/benchmark/simple/120/60
 ```
 - 3 replicas of app and mongo CPU request - 6 memory - 8 Gi each
 ```
+[ec2-user@ip-172-20-48-244 ~]$ curl http://localhost:9090/benchmark/simple/120/60
 {
   "noOfExecutions" : 290400,
   "noOfFailures" : 0,
