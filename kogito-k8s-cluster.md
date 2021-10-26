@@ -1,3 +1,7 @@
+- Test Env
+  - k8s cluster with master node on t3.medium
+  - 2 worker nodes on t2.2xlarge
+  - ran out of CPUs to increase more replicas
 - 1 replica of quarkus and 3 replica of mongo
 	```
 	 curl http://localhost:9090/benchmark/simple/120/60
@@ -61,6 +65,71 @@ curl http://localhost:9090/benchmark/simple/120/60
   "totalTimeMillis" : 7127634,
   "elapsedTimeMillis" : 120062,
   "requestsPerSecond" : 1205.0
+}
+```
+-3 replicas of app and mongo CPU request - 2 memory - 2 Gi each 
+```
+curl http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 287307,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 5876,
+    "responseTime" : 3
+  },
+  "maxResponseTime" : {
+    "index" : 51900,
+    "responseTime" : 12954
+  },
+  "averageResponseTime" : 24,
+  "percentile95" : 47,
+  "percentile99" : 67,
+  "totalTimeMillis" : 7052053,
+  "elapsedTimeMillis" : 120024,
+  "requestsPerSecond" : 2393.0
+}
+```
+-3 replicas of app and mongo CPU request - 2 memory - 4 Gi each
+```
+[ec2-user@ip-172-20-48-244 ~]$ curl http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 280697,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 244135,
+    "responseTime" : 2
+  },
+  "maxResponseTime" : {
+    "index" : 137835,
+    "responseTime" : 15978
+  },
+  "averageResponseTime" : 25,
+  "percentile95" : 43,
+  "percentile99" : 71,
+  "totalTimeMillis" : 7110086,
+  "elapsedTimeMillis" : 123072,
+  "requestsPerSecond" : 2280.0
+}
+```
+- 3 replicas of app and mongo CPU request - 3 memory - 4 Gi each
+```
+{
+  "noOfExecutions" : 290400,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 1440,
+    "responseTime" : 3
+  },
+  "maxResponseTime" : {
+    "index" : 65429,
+    "responseTime" : 16574
+  },
+  "averageResponseTime" : 24,
+  "percentile95" : 28,
+  "percentile99" : 59,
+  "totalTimeMillis" : 7052251,
+  "elapsedTimeMillis" : 120017,
+  "requestsPerSecond" : 2419.0
 }
 ```
 
