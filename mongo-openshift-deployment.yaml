@@ -1,0 +1,65 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: kogito-mongodb
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "4.2.6"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: developer
+      db: admin
+      passwordSecretRef:
+        name: kogito-mongodb-secret
+      roles:
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+      scramCredentialsSecretName: my-scram
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  statefulSet:
+      spec:
+        template:
+          spec:
+            # resources can be specified by applying an override
+            # per container name.
+            containers:
+              - name: mongod
+                env:
+                  - name: MANAGED_SECURITY_CONTEXT
+                    value: "true"
+                resources:
+                  limits:
+                    cpu: "12"
+                    memory: 20Gi
+                  requests:
+                    cpu: "12"
+                    memory: 10Gi
+              - name: mongodb-agent
+                env:
+                  - name: MANAGED_SECURITY_CONTEXT
+                    value: "true"
+                resources:
+                  limits:
+                    cpu: "1"
+                    memory: 1Gi
+                  requests:
+                    cpu: "1"
+                    memory: 1Gi
+# the user credentials will be generated from this secret
+# once the credentials are generated, this secret is no longer required
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kogito-mongodb-secret
+type: Opaque
+stringData:
+  password: password
