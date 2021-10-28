@@ -1,93 +1,40 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    app.quarkus.io/commit-id: 563bcc6445d2a5054ad0d9d6f8de6a17010729cd
-    app.quarkus.io/build-timestamp: 2021-10-25 - 13:26:06 +0000
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /q/metrics
-    prometheus.io/port: "8080"
-    prometheus.io/scheme: http
-  labels:
-    app.kubernetes.io/name: process-quarkus-example
-    app.kubernetes.io/version: 1.11.0.Final
-  name: process-quarkus-example
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-  selector:
-    app.kubernetes.io/name: process-quarkus-example
-    app.kubernetes.io/version: 1.11.0.Final
-  type: LoadBalancer
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    app.quarkus.io/commit-id: 563bcc6445d2a5054ad0d9d6f8de6a17010729cd
-    app.quarkus.io/build-timestamp: 2021-10-25 - 13:26:06 +0000
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /q/metrics
-    prometheus.io/port: "8080"
-    prometheus.io/scheme: http
-  labels:
-    app.kubernetes.io/version: 1.11.0.Final
-    app.kubernetes.io/name: process-quarkus-example
   name: process-quarkus-example
 spec:
-  replicas: 1
+  replicas: 16
   selector:
     matchLabels:
-      app.kubernetes.io/version: 1.11.0.Final
-      app.kubernetes.io/name: process-quarkus-example
+      app: process-quarkus-example
   template:
     metadata:
-      annotations:
-        app.quarkus.io/commit-id: 563bcc6445d2a5054ad0d9d6f8de6a17010729cd
-        app.quarkus.io/build-timestamp: 2021-10-25 - 13:26:06 +0000
-        prometheus.io/scrape: "true"
-        prometheus.io/path: /q/metrics
-        prometheus.io/port: "8080"
-        prometheus.io/scheme: http
       labels:
-        app.kubernetes.io/version: 1.11.0.Final
-        app.kubernetes.io/name: process-quarkus-example
+        app: process-quarkus-example
     spec:
       imagePullSecrets:
       - name: private-reg-cred
       containers:
-        - env:
-            - name: KUBERNETES_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          image:  quay.io/mpaulgreen/process-quarkus-example:9
-          imagePullPolicy: Always
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /q/health/live
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 0
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 10
-          name: process-quarkus-example
-          ports:
-            - containerPort: 8080
-              name: http
-              protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /q/health/ready
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 0
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 10
+      - name: process-quarkus-example
+        image: quay.io/mpaulgreen/process-quarkus-example:15
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "300m"
+            memory: 1Gi
+          requests:
+            cpu: "300m"
+            memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-quarkus-example
+spec:
+  selector:
+    app: process-quarkus-example
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
