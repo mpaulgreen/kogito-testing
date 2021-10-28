@@ -1,8 +1,8 @@
-- All Pods of test app was run on best effot basis as there is identified memory leak issue
+- All Pods of test app was run on Qos - best effot basis as there is identified memory leak issue
 - 20 repicas of test app pods 
 - Min and max db connection of 10
 - worker pool size of 10
-- Stateful set of mongodb (3 rs) - Qos 
+- Stateful set of mongodb (3 rs) -  
   - mongod container - cpu 6, memory 12 Gi
   - mongodb-agent conatiner - cpu 2 memory 2Gi
 - quarkus bench mark app
