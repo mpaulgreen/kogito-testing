@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: process-quarkus-example
 spec:
-  replicas: 16
+  replicas: 20
   selector:
     matchLabels:
       app: process-quarkus-example
@@ -16,16 +16,16 @@ spec:
       - name: private-reg-cred
       containers:
       - name: process-quarkus-example
-        image: quay.io/mpaulgreen/process-quarkus-example:15
+        image: quay.io/mpaulgreen/process-quarkus-example:31
+        env:
+        - name: MIN_POOL
+          value: "10"
+        - name: MAX_POOL
+          value: "10"
+        - name: WORKER_POOL_SIZE
+          value: "10"
         ports:
         - containerPort: 8080
-        resources:
-          limits:
-            cpu: "300m"
-            memory: 1Gi
-          requests:
-            cpu: "300m"
-            memory: 1Gi
 ---
 apiVersion: v1
 kind: Service

@@ -1,3 +1,80 @@
+- All Pods of test app was run on best effot basis as there is identified memory leak issue
+- 20 repicas of test app pods 
+- Min and max db connection of 10
+- worker pool size of 10
+- Stateful set of mongodb (3 rs) - Qos 
+  - mongod container - cpu 6, memory 12 Gi
+  - mongodb-agent conatiner - cpu 2 memory 2Gi
+- quarkus bench mark app
+  - worker pool of 100
+- Test executed with kogito bechmark as a pod and from its tty terminals to avoid network latency
+```
+/work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 1005924,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 257,
+    "responseTime" : 1
+  },
+  "maxResponseTime" : {
+    "index" : 977751,
+    "responseTime" : 3705
+  },
+  "averageResponseTime" : 6,
+  "percentile95" : 12,
+  "percentile99" : 44,
+  "totalTimeMillis" : 6745910,
+  "elapsedTimeMillis" : 122735,
+  "requestsPerSecond" : 8195.0
+/work $
+
+/work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 1061696,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 36292,
+    "responseTime" : 1
+  },
+  "maxResponseTime" : {
+    "index" : 23,
+    "responseTime" : 1777
+  },
+  "averageResponseTime" : 6,
+  "percentile95" : 18,
+  "percentile99" : 54,
+  "totalTimeMillis" : 6650993,
+  "elapsedTimeMillis" : 120039,
+  "requestsPerSecond" : 8844.0
+}/work $
+
+
+/work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 1188953,
+  "noOfFailures" : 0,
+  "minResponseTime" : {
+    "index" : 175,
+    "responseTime" : 1
+  },
+  "maxResponseTime" : {
+    "index" : 639485,
+    "responseTime" : 2073
+  },
+  "averageResponseTime" : 5,
+  "percentile95" : 14,
+  "percentile99" : 47,
+  "totalTimeMillis" : 6576357,
+  "elapsedTimeMillis" : 120003,
+  "requestsPerSecond" : 9907.0
+
+```
+
+
+- Legacy Results
+
+
 - Executed within the cluster
 - 20 replicas
 - 10 Connection pool

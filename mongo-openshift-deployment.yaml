@@ -37,22 +37,22 @@ spec:
                     value: "true"
                 resources:
                   limits:
-                    cpu: "12"
-                    memory: 10Gi
+                    cpu: "6"
+                    memory: 12Gi
                   requests:
-                    cpu: "12"
-                    memory: 10Gi
+                    cpu: "6"
+                    memory: 12Gi
               - name: mongodb-agent
                 env:
                   - name: MANAGED_SECURITY_CONTEXT
                     value: "true"
                 resources:
                   limits:
-                    cpu: "1"
-                    memory: 1Gi
+                    cpu: "2"
+                    memory: 2Gi
                   requests:
-                    cpu: "1"
-                    memory: 1Gi
+                    cpu: "2"
+                    memory: 2Gi
 # the user credentials will be generated from this secret
 # once the credentials are generated, this secret is no longer required
 ---
