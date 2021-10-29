@@ -1,13 +1,21 @@
+- compute-machine-type c5.4xlarge in a rosa cluster
 - All Pods of test app was run on Qos - best effot basis as there is identified memory leak issue
 - 20 repicas of test app pods 
 - Min and max db connection of 10
 - worker pool size of 10
-- Stateful set of mongodb (3 rs) -  
+- pods gets evited after few runs
+- Stateful set of mongodb (3 replicas) -  
   - mongod container - cpu 6, memory 12 Gi
   - mongodb-agent conatiner - cpu 2 memory 2Gi
 - quarkus bench mark app
   - worker pool of 100
-- Test executed with kogito bechmark as a pod and from its tty terminals to avoid network latency
+- Test executed with kogito bechmark as a pod and from its tty to avoid network latency
+- Test Client used was developed by kogito bench marking team
+- All Test Client logging was removed for testing
+- Images attached in github.
+
+- References
+  - https://github.com/mpaulgreen/kogito-benchmark/tree/openshift
 ```
 /work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
 {
@@ -70,16 +78,37 @@
   "requestsPerSecond" : 9907.0
 
 ```
+- The day after
+
+```
+/work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
+{
+  "noOfExecutions" : 1005229,
+  "noOfFailures" : 3,
+  "minResponseTime" : {
+    "index" : 139,
+    "responseTime" : 1
+  },
+  "maxResponseTime" : {
+    "index" : 595832,
+    "responseTime" : 5039
+  },
+  "averageResponseTime" : 6,
+  "percentile95" : 11,
+  "percentile99" : 46,
+  "totalTimeMillis" : 6668573,
+  "elapsedTimeMillis" : 120004,
+  "requestsPerSecond" : 8376.0
+```
+
+- ***Legacy Results***
 
 
-- Legacy Results
-
-
-- Executed within the cluster
-- 20 replicas
-- 10 Connection pool
-- 10 worker pool
-- 200 worker pool of test client
+  - Executed within the cluster
+  - 20 replicas
+  - 10 Connection pool
+  - 10 worker pool
+  - 200 worker pool of test client
 
 ```
 /work $ curl -X GET http://localhost:9090/benchmark/simple/120/60
