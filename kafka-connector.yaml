@@ -1,0 +1,18 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+  name: kogito-connector
+  namespace: mongodb
+spec:
+  class: io.debezium.connector.mongodb.MongoDbConnector
+  config:
+    mongodb.hosts: >-
+      kogito-sharded-mongo-mongos-0.kogito-sharded-mongo-svc.mongodb.svc.cluster.local
+    mongodb.members​.auto.discover: false
+    mongodb.name: kogito
+    mongodb.password: mongoadmin
+    mongodb.ssl.enabled: false
+    mongodb.user: mongoadmin
+  tasksMax: 4

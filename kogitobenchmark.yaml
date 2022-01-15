@@ -55,7 +55,7 @@ spec:
           image: quay.io/mpaulgreen/kogito-benchmark-client:5
           env:
           - name: URL
-            value: http://process-quarkus-example-mpaul-kogito.apps.mpkogito.p9nf.p1.openshiftapps.com
+            value: http://process-quarkus-example-mongodb.apps.mpkogito.ighz.p1.openshiftapps.com
           - name: WORKER_POOL_SIZE
             value: "100"
           imagePullPolicy: Always

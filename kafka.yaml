@@ -1,0 +1,162 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"kafka.strimzi.io/v1beta2","kind":"Kafka","metadata":{"annotations":{},"name":"kogito-kafka","namespace":"mongodb"},"spec":{"entityOperator":{"topicOperator":{},"userOperator":{}},"kafka":{"config":{"inter.broker.protocol.version":"2.8","log.message.format.version":"2.8","offsets.topic.replication.factor":3,"transaction.state.log.min.isr":2,"transaction.state.log.replication.factor":3},"listeners":[{"name":"plain","port":9092,"tls":false,"type":"internal"},{"name":"tls","port":9093,"tls":true,"type":"internal"}],"replicas":3,"storage":{"type":"jbod","volumes":[{"deleteClaim":false,"id":0,"size":"100Gi","type":"persistent-claim"}]},"version":"2.8.0"},"zookeeper":{"replicas":3,"storage":{"deleteClaim":false,"size":"100Gi","type":"persistent-claim"}}}}
+  creationTimestamp: '2021-11-19T11:53:42Z'
+  generation: 2
+  managedFields:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+        'f:spec':
+          .: {}
+          'f:entityOperator':
+            .: {}
+            'f:topicOperator': {}
+            'f:userOperator': {}
+          'f:kafka':
+            .: {}
+            'f:config':
+              .: {}
+              'f:inter.broker.protocol.version': {}
+              'f:log.message.format.version': {}
+              'f:offsets.topic.replication.factor': {}
+              'f:transaction.state.log.min.isr': {}
+              'f:transaction.state.log.replication.factor': {}
+            'f:listeners': {}
+            'f:replicas': {}
+            'f:storage':
+              .: {}
+              'f:type': {}
+              'f:volumes': {}
+            'f:version': {}
+          'f:zookeeper':
+            .: {}
+            'f:replicas': {}
+            'f:storage':
+              .: {}
+              'f:deleteClaim': {}
+              'f:size': {}
+              'f:type': {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2021-11-19T11:53:42Z'
+    - apiVersion: kafka.strimzi.io/v1beta2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          .: {}
+          'f:clusterId': {}
+          'f:conditions': {}
+          'f:listeners': {}
+          'f:observedGeneration': {}
+      manager: okhttp
+      operation: Update
+      subresource: status
+      time: '2021-11-19T11:55:41Z'
+    - apiVersion: kafka.strimzi.io/v1beta2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:kafka':
+            'f:config':
+              'f:auto.create.topics.enable': {}
+      manager: Mozilla
+      operation: Update
+      time: '2021-11-19T13:16:50Z'
+  name: kogito-kafka
+  namespace: mongodb
+  resourceVersion: '430901'
+  uid: 0dfc3987-3066-40a8-a2bd-d2e2d6c17b0a
+spec:
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+  kafka:
+    config:
+      auto.create.topics.enable: true
+      inter.broker.protocol.version: '2.8'
+      log.message.format.version: '2.8'
+      offsets.topic.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      transaction.state.log.replication.factor: 3
+    listeners:
+      - name: plain
+        port: 9092
+        tls: false
+        type: internal
+      - name: tls
+        port: 9093
+        tls: true
+        type: internal
+    replicas: 3
+    storage:
+      type: jbod
+      volumes:
+        - deleteClaim: false
+          id: 0
+          size: 100Gi
+          type: persistent-claim
+    version: 2.8.0
+  zookeeper:
+    replicas: 3
+    storage:
+      deleteClaim: false
+      size: 100Gi
+      type: persistent-claim
+status:
+  clusterId: WutjvrbFQmCK-M0niygpDw
+  conditions:
+    - lastTransitionTime: '2021-11-19T13:16:52.353Z'
+      status: 'True'
+      type: Ready
+  listeners:
+    - addresses:
+        - host: kogito-kafka-kafka-bootstrap.mongodb.svc
+          port: 9092
+      bootstrapServers: 'kogito-kafka-kafka-bootstrap.mongodb.svc:9092'
+      type: plain
+    - addresses:
+        - host: kogito-kafka-kafka-bootstrap.mongodb.svc
+          port: 9093
+      bootstrapServers: 'kogito-kafka-kafka-bootstrap.mongodb.svc:9093'
+      certificates:
+        - |
+          -----BEGIN CERTIFICATE-----
+          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
+          -----END CERTIFICATE-----
+      type: tls
+  observedGeneration: 2

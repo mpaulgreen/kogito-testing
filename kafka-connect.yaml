@@ -1,0 +1,17 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  annotations:
+    strimzi.io/use-connector-resources: 'true'
+  name: my-connect-cluster
+  namespace: mongodb
+spec:
+  bootstrapServers: 'kogito-kafka-kafka-bootstrap.mongodb.svc:9092'
+  externalConfiguration:
+    volumes:
+      - name: kogito-credentials
+        secret:
+          secretName: private-reg-cred
+  image: 'quay.io/mpaulgreen/debezium-connector:4'
+  replicas: 1
+  version: 2.8.0

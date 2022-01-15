@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: process-quarkus-example
 spec:
-  replicas: 20
+  replicas: 1
   selector:
     matchLabels:
       app: process-quarkus-example
@@ -16,7 +16,7 @@ spec:
       - name: private-reg-cred
       containers:
       - name: process-quarkus-example
-        image: quay.io/mpaulgreen/process-quarkus-example:31
+        image: quay.io/mpaulgreen/process-quarkus-example:101
         env:
         - name: MIN_POOL
           value: "10"
