@@ -1,0 +1,7 @@
+- TODO
+    - Review sharding
+    - Set up IPI cluster
+    - Set up Replica Set cluster
+    - Update Client
+    - Set up Sharded Cluster
+    - Prepare Result

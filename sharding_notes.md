@@ -12,3 +12,42 @@ Chossing shard key
     - Use a compound shard key
         - Compute a special purpose shard key or use a compoine shard ket if the existing field in a collection is not an ideal key
 
+
+- Commands
+```
+sh.status()
+sh.enableSharding('dbName')
+sh.shardCollection('dbName.collectionName',{'from.country':1,'from.number':1})
+sh.shardCollection('dbName.collectionName',{'fieldName':'hashed'}) # for hashing- only for a single key - looses locality
+show dbs
+show collections
+db.messages.getIndexes()
+
+// Tagging a shard
+sh.addShardTag('shardName', 'tagName')
+sh.addTagRange('collection with namespace', 'key range', 'tag')
+sh.addTagRange("telco.messages',{country : "01"}, {country: "02"}, "theTag")
+
+// move chunk
+sh.moveChunk("telco.messages", {country: "01"}, "shard0002")
+
+
+//Querying the chunks
+use config
+db.chunks.find.pretty()
+
+use dbName
+db.messages.find('from.country':'44','from.number':'13455553').pretty()
+```
+
+- Picking a shard key
+    - Cant change shard key definition
+    - Cant unshard a collection
+    - Shard key field value cant be changed
+- Pick a shard key with high cardinality
+- Choosing a good key
+    - Your access pattern
+    - Theoritical granularity
+    - Actual Granularity
+- Hashed Key
+- Tag aware sharding

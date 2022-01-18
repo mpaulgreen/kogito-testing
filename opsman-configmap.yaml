@@ -5,4 +5,4 @@ metadata:
   namespace: mongodb
 data:
   baseUrl: http://ops-manager-svc.mongodb.svc.cluster.local:8080
-  orgId: 6196ead55a5ff71ba8604b37
+  orgId: 61e5845da7ef800ed10815f9
